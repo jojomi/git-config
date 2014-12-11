@@ -1,0 +1,28 @@
+[alias]
+  # short alias
+  m = merge
+
+  # merge excluding fast-forward
+  mnf = merge --no-ff
+
+  # merge trying to fast-forward
+  mf = merge --ff-only
+
+  # checkout a file by using our state
+  ours = !sh -c 'git checkout --ours $@ && git add "$@"' -
+  # checkout a file by using their state
+  theirs = !sh -c 'git checkout --theirs $@ && git add "$@"' -
+
+
+  # inverted merging (being on target branch)
+
+  # mergeto without specifying fast-forward style
+  mergeto = !sh -c 'SOURCE=$(git current-branch-name) && DEST=${1:-$(git master-branch)} && git checkout $DEST && git upd && git merge $MERGE_PARAMS $SOURCE && git ll $(git fork-commit $DEST $SOURCE)~2.. && echo -e "Merged `tput bold`$SOURCE `tput sgr0`to `tput bold`$DEST`tput sgr0`. Use `tput bold`git kill-branch $SOURCE `tput sgr0`to remove source branch if merge succeeded."' -
+
+  mergetonf = !sh -c 'MERGE_PARAMS="--no-ff" git mergeto' -
+  mergetof = !sh -c 'MERGE_PARAMS="--ff-only" git mergeto' -
+  mtonf = !sh -c 'git mergeto' -    # also see graft from git-extras
+  mtof = !sh -c 'git mergetof' -
+
+
+  cleanorig = !find . -name '*.orig' -delete

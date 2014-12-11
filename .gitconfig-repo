@@ -1,0 +1,73 @@
+[core]
+  excludesfile = .gitconfig.d/gitignore
+  attributesfile = .gitconfig.d/gitattributes
+  #editor = nano    # visual editor might be possible
+  #pager = less     # cat would prevent paging
+
+[init]
+  templatedir = .gitconfig.d/template
+
+[color]
+  ui = auto
+  interactive = auto
+  # colors for different commands like branch, diff, and status can be configured here
+
+[rebase]
+  autosquash = true
+
+[help]
+  #autocorrect = 20      # wait two seconds before executing suggestion
+
+[mergetool]
+  keepBackup = true
+
+[diff]
+  algorithm = patience  # slower, but high quality diff
+
+[diff "zip"]
+  textconv = unzip -c -a
+
+[diff "image"]
+  command = .gitconfig.d/diff-image
+
+
+[commit]
+  template = .gitconfig.d/commit-template
+
+[push]
+  default = simple      # git 2.0 style, needs git >= 1.7.11, Debian Wheezy ships 1.7.10.x (see http://blog.nicoschuele.com/posts/git-2-0-changes-push-default-to-simple)
+
+[tag]
+  sort = version:refname
+
+[gc]
+  pruneexpire = 30 days
+  auto = 6700
+
+[credential]
+  helper = store
+
+[advice]
+  #pushNonFastForward = false
+  #statusHints = false
+
+
+
+
+[include]
+  path = .gitconfig.d/alias/helper
+  path = .gitconfig.d/alias/short
+  path = .gitconfig.d/alias/add
+  path = .gitconfig.d/alias/commit
+  path = .gitconfig.d/alias/diff
+  path = .gitconfig.d/alias/fetch
+  path = .gitconfig.d/alias/log
+  path = .gitconfig.d/alias/merge
+  path = .gitconfig.d/alias/pull
+  path = .gitconfig.d/alias/push
+  path = .gitconfig.d/alias/rebase
+  path = .gitconfig.d/alias/reset
+  path = .gitconfig.d/alias/review
+  path = .gitconfig.d/alias/stash
+  path = .gitconfig.d/alias/status
+  path = .gitconfig.d/alias/tracking

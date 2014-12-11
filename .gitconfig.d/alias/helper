@@ -1,0 +1,14 @@
+[alias]
+  current-branch-name = rev-parse --abbrev-ref HEAD
+  master-branch = !sh -c 'echo ${GIT_MASTER_BRANCH:-master}' -
+  current-commit-hash = rev-parse HEAD
+  current-commit-hash-short = rev-parse --short HEAD
+
+  # execute a git command with current changes being auto-stashed and restored (if command is successful)
+  stashed = !sh -c \"LC_ALL=C git stash save | grep 'No local changes to save' && git $* || (git $* && git stash pop)\" -
+
+  fork-commit = !sh -c 'git merge-base --fork-point "${1:-$(git master-branch)}" "${2:-HEAD}"' -
+  initial-commit-hash = rev-list --max-parents=0 HEAD
+  oldest-autosquash-commit = !sh -c \"git log --pretty=%H --grep='^fixup!' --grep '^squash!' | tail -1\" -
+
+  tracking-branch-name = !sh -c 'git rev-parse --abbrev-ref --symbolic-full-name {1:-$(git current-branch-name)}@{upstream}' -

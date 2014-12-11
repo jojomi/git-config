@@ -1,0 +1,11 @@
+[alias]
+  # short alias
+  r = reset
+  # short alias for resetting hard
+  rh = reset --hard
+
+  # hard reset branch to its tracking branch (reset)
+  reset-hard-origin = !sh -c 'REMOTE_BRANCH=$(git rev-parse --abbrev-ref --symbolic-full-name @{u}) && git reset --hard $REMOTE_BRANCH' -
+  reset-hard-tracking = !sh -c 'git reset --hard $(git tracking-branch-name)' -
+  rho = !git reset-hard-origin
+  rht = !git reset-hard-tracking

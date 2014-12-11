@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+SOURCE_BRANCH=${2:-$(git master-branch)}
+CURRENT_BRANCH=$(git current-branch-name)
+case "$CURRENT_BRANCH" in
+  $SOURCE_BRANCH) git ll ${1:-} ;;
+  *) git ll $SOURCE_BRANCH..${1:-HEAD} ;;
+esac

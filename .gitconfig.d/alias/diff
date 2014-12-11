@@ -1,0 +1,10 @@
+[alias]
+  # short alias
+  d = diff
+
+  # create word diff which can keep small changes oneline
+  wdiff = diff --word-diff=color
+  wd = !git wdiff
+
+  # show staged changes
+  staged = diff --cached

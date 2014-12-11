@@ -1,0 +1,14 @@
+# dependency: log aliases (git lb)
+
+[alias]
+  # short status
+  s = status --short --branch
+
+  # more verbose status
+  st = status --branch
+
+  # overview, parameter: number of log entries [default 3]
+  o = !sh -c '(git describe 2>/dev/null || echo "no tag") && git s && echo "" && (git lb | head -n ${1:-3} && echo "")' -
+
+  # overview including working dir diff, parameter: number of log entries [default 3]
+  od = !sh -c 'git o "$@" && echo "" && git diff HEAD^..' -

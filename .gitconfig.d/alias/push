@@ -1,0 +1,5 @@
+[alias]
+  # short aliases
+  ps = push
+  pus = push
+  pf = push --force

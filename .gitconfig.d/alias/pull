@@ -1,0 +1,11 @@
+# dependency: log aliases (git new)
+
+[alias]
+  # short aliases
+  pl = pull
+  pul = pull
+  pur = pull --rebase
+
+  # make your repo up-to-date and show commits newly added
+  update = !sh -c ': git pull && git fetch --all && git pull --rebase --prune "$@" && git submodule update --init --recursive && git new'
+  up = !git update

@@ -1,0 +1,17 @@
+[alias]
+  diff-since-fork = !sh -c 'git diff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+  files-changed-since-fork = !sh -c 'git diff --name-only $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+  diff-since-fork = !sh -c 'git wdiff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+
+
+  # remove branch
+  remove-branch = !sh -c 'git branch -d ${1}'
+  remove-branch-with-tracking = !sh -c 'git branch --remotes --delete $(tracking-branch-name ${1}) && git remote-branch ${1}' -
+  rmb = !git remove-branch
+  rmbt = !git remove-branch-with-tracking
+
+  # remove tag
+  remove-tag = !sh -c 'git tag -d ${1}'
+  remove-tag-with-remote = !sh -c 'git push ${2:-origin} :refs/tags/${1} && git remote-tag ${1}' -
+  rmt = !git remove-tag
+  rmtr = !git remove-tag-with-remote

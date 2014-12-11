@@ -1,0 +1,45 @@
+#!/bin/sh
+
+
+# first attempt: imagemagick based tools (compare, montage, display) in X environment
+type -p "compare" > /dev/null && type -p "montage" > /dev/null && type -p "display" > /dev/null && test -n "$DISPLAY"
+status=$?
+if [ $status -eq 0 ]; then
+  compare $2 $1 png:- | montage -geometry +4+4 $2 - $1 png:- | display -title "$1" -
+  exit $?
+fi
+
+# second attempt: imagemagick based tools (identify) in terminal environment
+type -p "identify" > /dev/null
+status=$?
+if [ $status -eq 0 ]; then
+  fileA=$(mktemp /tmp/diff-identify.XXXXXXXXXX)
+  identify $2 | awk '{$1=""; print $0}' > $fileA
+  fileB=$(mktemp /tmp/diff-identify.XXXXXXXXXX)
+  identify $1 | awk '{$1=""; print $0}' > $fileB
+  type -p "diff" > /dev/null
+  status=$?
+  if [ $status -eq 0 ]; then
+    diff $fileA $fileB
+    rm $fileA
+    rm $fileB
+    exit 0
+  fi
+  echo 'a:'
+  cat "$fileA"
+  echo 'b:'
+  cat "$fileB"
+  rm $fileA
+  rm $fileB
+  exit 0
+fi
+
+# third attempt: filesize, md5
+echo 'a size: '$(du -h $2 | awk '{ print $1 }')
+echo 'b size: '$(du -h $1 | awk '{ print $1 }')
+type -p "md5sum" > /dev/null
+status=$?
+if [ $status -eq 0 ]; then
+  echo 'a md5: '$(md5sum $2 | awk '{ print $1 }')
+  echo 'b md5: '$(md5sum $1 | awk '{ print $1 }')
+fi

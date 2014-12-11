@@ -1,0 +1,10 @@
+[alias]
+  # short aliases
+  a = add
+  ai = add --interactive
+  ap = add --patch
+
+  # include status after add operation
+  as = !git a "$@" && git s
+  ais = !git ai "$@" && git s
+  aps = !git ap "$@" && git s
