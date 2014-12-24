@@ -8,7 +8,7 @@
   ll = log --color --graph --pretty=format:'%C(bold green)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   # log vs. "master" (which commits are not on "master" yet?)
-  log-branch = !sh -c 'COMMAND=$(find "$(pwd)" "$HOME/.gitconfig.d" "/etc/.gitconfig.d"  -wholename "*/.gitconfig.d/alias/scripts/log-branch" 2>/dev/null | head -n 1) && . $COMMAND ${1:-HEAD}' -
+  log-branch = !sh -c '$ROOT_DIR/.gitconfig.d/alias/scripts/log-branch ${1:-HEAD}' -
   lb = !git log-branch
 
   # log only commits made by me

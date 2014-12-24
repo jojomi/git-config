@@ -17,6 +17,9 @@ desktop, but git-config does have its advantages:
 * it is **pretty portable** *(at least on unixoid systems with sh installed)*
 * best of all: **it's free and open-source** *(deploy it a hundred times for free if you need to)*
 
+Plus you sure can still use graphical tools for tasks like merging or diffing,
+no matter how much of your command-line experience you customized.
+
 
 How to use git-config
 ---------------------
