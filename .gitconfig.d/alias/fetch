@@ -1,3 +1,7 @@
 [alias]
+  # fetch all items while pruning obsolete ones
   fetchall = fetch --verbose --all --prune
+
+  # fetch all items while pruning obsolete ones
+  # see: fetchall
   fa = !git fetchall

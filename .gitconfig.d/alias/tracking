@@ -1,8 +1,16 @@
 [alias]
   # checkout a branch from a remote (default origin) as a tracking branch
+  # ex: git track your-feature
   track = !sh -c 'git checkout -t ${2:-origin}/${1}' -
+
+  # ex: git tr
+  # see: track
   tr = !git track
 
   # publish a branch (default current) to a remote (default origin)
+  # ex: git publish
   publish = !sh -c 'git push --set-upstream ${2:-origin} ${1:-$(git current-branch-name)}' -
+
+  # ex: git pub
+  # see: publish
   pub = !git publish

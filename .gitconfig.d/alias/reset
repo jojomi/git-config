@@ -1,11 +1,23 @@
 [alias]
-  # short alias
+  # reset
+  # ex: git r
   r = reset
-  # short alias for resetting hard
+
+  # reset hard
+  # ex: git rh
   rh = reset --hard
 
-  # hard reset branch to its tracking branch (reset)
+  # reset hard (to origin)
+  # ex: git reset-hard-origin
   reset-hard-origin = !sh -c 'REMOTE_BRANCH=$(git rev-parse --abbrev-ref --symbolic-full-name @{u}) && git reset --hard $REMOTE_BRANCH' -
+
+  # reset hard (to tracking branch)
+  # ex: git reset-hard-tracking
   reset-hard-tracking = !sh -c 'git reset --hard $(git tracking-branch-name)' -
+
+
+  # alias: reset-hard-origin
   rho = !git reset-hard-origin
+
+  # alias: reset-hard-tracking
   rht = !git reset-hard-tracking

@@ -1,21 +1,49 @@
 # log styles (see http://oli.jp/2012/git-powerup)
 
 [alias]
-  # show last n commits, defaults to n=5
+  # show log of last n commits, defaults to n=5
+  # see: ll
+  # ex: git l
+  # > * 7b99cc1 - (HEAD, master) add documentation (vor 14 Minuten) <jojomi>
+  # > * c9f997a - documentation infrastructure (vor 32 Minuten) <jojomi>
+  # > * dc1a9ec - Improve path generation on bootstrapping (vor 7 Wochen) <jojomi>
+  # > * 100c8ab - Add project structure (vor 7 Wochen) <jojomi>
+  # > * d496667 - Initial commit (vor 9 Wochen) <jojomi>
+  # ex: git l 2
+  # > * 7b99cc1 - (HEAD, master) add documentation (vor 14 Minuten) <jojomi>
+  # > * c9f997a - documentation infrastructure (vor 32 Minuten) <jojomi>
   l = !sh -c 'git ll -${1:-5}' -
 
   # nicely format log (oneline with tree, hash, message, author, date, and colors)
+  # ex: git ll
+  # > * d496667 - Initial commit (vor 9 Wochen) <jojomi>
   ll = log --color --graph --pretty=format:'%C(bold green)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   # log vs. "master" (which commits are not on "master" yet?)
+  # ex: git log-branch
+  # ex: git log-branch my-feature
   log-branch = !sh -c '$ROOT_DIR/.gitconfig.d/alias/scripts/log-branch ${1:-HEAD}' -
+
+  # log commits on this branch only (since fork)
+  # ex: git lb
+  # see: log-branch
   lb = !git log-branch
 
-  # log only commits made by me
-  log-me = !UN=$(git config user.name) && git ll --author="\"$UN\""
+  # log only commits made by me (formatted like `git ll`)
+  # ex: git log-me -1
+  # > * 7b99cc1 - (HEAD, master) add documentation (vor 14 Minuten) <jojomi>
+  log-me = !UN=$(git config user.name) && git ll --author="\"$UN\"" "$@"
 
-  # new commits created by the last command
+  # new commits created by the last command (formatted like `git ll`)
+  # ex: git new
+  # see: git update
+  # see: git ll
   new = !sh -c 'git ll $1@{1}..$1@{0} "$@"' -
 
   # show commit hashes of the HEADs of branches
+  # ex: git current-heads
+  # > c9f997a HEAD
+  # > c9f997a refs/heads/master
+  # > 1eab44e refs/remotes/origin/HEAD
+  # > 1eab44e refs/remotes/origin/master
   current-heads = show-ref --head --abbrev

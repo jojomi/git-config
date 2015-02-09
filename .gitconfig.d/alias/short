@@ -1,25 +1,72 @@
 [alias]
+  # status
   s = status
+
+  # log
   l = log
+
+  # diff
   d = diff
+
+  # add
   a = add
+
+  # commit
   c = commit
+
+  # branch
   b = branch
+
+  # merge
   m = merge
+
+  # fetch
   f = fetch
+
+  # reset
   r = reset
+
+  # tag
   t = tag
+
+  # grep
   g = grep
+
+  # init
   i = init
+
+  # pull
   p = pull
+
+  # push
   ps = push
+
+  # show
   sh = show
+
+  # clone
   cl = clone
+
+  # checkout
   co = checkout
+
+  # rebase
   rb = rebase
+
+  # stash
   st = stash
+
+  # bisect
   bi = bisect
+
+  # cherry-pick
   ch = cherry-pick
+
+  # blame
   bl = blame
+
+  # archive
   ar = archive
+
+  # describe
   desc = describe

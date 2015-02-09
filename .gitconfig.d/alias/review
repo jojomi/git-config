@@ -1,17 +1,45 @@
 [alias]
+  # show diff since fork
+  # ex: git diff-since-fork
+  # ex: git diff-since-fork master my-feature
   diff-since-fork = !sh -c 'git diff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+
+  # show word-based diff since fork
+  # ex: git word-diff-since-fork
+  # ex: git word-diff-since-fork master my-feature
+  word-diff-since-fork = !sh -c 'git wdiff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+
+  # show files changed since fork
+  # ex: files-changed-since-fork
+  # ex: files-changed-since-fork master my-feature
   files-changed-since-fork = !sh -c 'git diff --name-only $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
-  diff-since-fork = !sh -c 'git wdiff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
 
 
   # remove branch
+  # ex: git remove-branch my-feature
   remove-branch = !sh -c 'git branch -d ${1}'
-  remove-branch-with-tracking = !sh -c 'git branch --remotes --delete $(tracking-branch-name ${1}) && git remote-branch ${1}' -
+
+  # alias: remove-branch
   rmb = !git remove-branch
+
+  # remove branch including tracked branch
+  # ex: git remove-branch my-feature
+  remove-branch-with-tracking = !sh -c 'git branch --remotes --delete $(git tracking-branch-name ${1}) && git remove-branch ${1}' -
+
+  # alias: remove-branch-with-tracking
   rmbt = !git remove-branch-with-tracking
 
+
   # remove tag
+  # ex: git remove-tag v0.4
   remove-tag = !sh -c 'git tag -d ${1}'
-  remove-tag-with-remote = !sh -c 'git push ${2:-origin} :refs/tags/${1} && git remote-tag ${1}' -
+
+  # alias: remove-tag
   rmt = !git remove-tag
+
+  # remove tag including remote tag of with name
+  # ex: git remove-tag-with-remote v0.4
+  remove-tag-with-remote = !sh -c 'git push ${2:-origin} :refs/tags/${1} && git remote-tag ${1}' -
+
+  # alias: remove-tag-with-remote
   rmtr = !git remove-tag-with-remote

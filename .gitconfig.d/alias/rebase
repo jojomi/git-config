@@ -1,16 +1,39 @@
 [alias]
   # rebase current branch (assume being forked from master)
+  # ex: git rbi
+  # ex: git rbi 6fcc9b2
   rbi = !sh -c 'git rebase --interactive ${1:-$(git fork-commit)}' -
 
   # rebase n revisions from HEAD (default 3)
+  # ex: git rbih
+  # ex: git rbih 10
   rbih = !sh -c 'git rbi HEAD~${1:-3}' -
 
   # rebase automatically (find oldest commit to be fixupped or squashed)
-  rba = !sh -c 'HASH=$(git log --format='%H' --grep '^fixup!' --grep '^squash!' | tail -n 1) && git rbi $(git fork-commit)' -
+  # ex: git rba
+  rba = !sh -c 'HASH=$(git oldest-autosquash-commit) && git rbi $(git fork-commit)' -
 
-  # fixup
+  # fixup specific commit (default HEAD)
+  # ex: git fix
+  # ex: git fix aa861e2
   fix = !sh -c 'git commit --fixup=${1:-HEAD}' -
+
+  # fixup specific commit and initiate rebase on that commit so that the fixup can quickly be applied
+  # ex: git fix-rebase
+  # ex: git fix-rebase 6257bdb
+  # see: fix
   fix-rebase = !sh -c 'HASH=$(git rev-parse ${1:-HEAD}) && PARENT_HASH=$(git rev-parse $HASH~1) && echo "fixing commit $HASH" && echo "rebasing onto $PARENT_HASH" && git fix $HASH && git rebase --interactive $PARENT_HASH' -
-  fix-instant = !sh -c 'export GIT_EDITOR=true && HASH=$(git rev-parse ${1:-HEAD}) && PARENT_HASH=$(git rev-parse $HASH~1) && echo "fixing commit $HASH" && echo "rebasing onto $PARENT_HASH" && git fix $HASH && git rebase --interactive $PARENT_HASH' -
+
+  # alias: fix-rebase
   fr = !git fix-rebase
+
+
+  # fix a commit and instantly rebase to it (no questions asked)
+  # ex: git fix-instant
+  # ex: git fix-instant d199090
+  # see: fix
+  # see: fix-rebase
+  fix-instant = !sh -c 'export GIT_EDITOR=true && HASH=$(git rev-parse ${1:-HEAD}) && PARENT_HASH=$(git rev-parse $HASH~1) && echo "fixing commit $HASH" && echo "rebasing onto $PARENT_HASH" && git fix $HASH && git rebase --interactive $PARENT_HASH' -
+
+  # alias: fix-instant
   fi = !git fix-instant

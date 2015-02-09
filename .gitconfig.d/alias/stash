@@ -1,10 +1,23 @@
 [alias]
-  # short aliases
+  # list stashes
+  # ex: git sl
   sl = stash list
+
+  # apply stash
+  # ex: git sa
   sa = stash apply
+
+  # save stash
+  # ex: git ss
   ss = stash save
+
+  # pop stash
+  # ex: git sp
   sp = stash pop
 
   # snapshot current state
+  # ex: git snapshot
   snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+
+  # alias: snapshot
   sn = !git snapshot

@@ -1,14 +1,50 @@
 [alias]
+  # get current branch name
+  # ex: git current-branch-name
+  # > master
   current-branch-name = rev-parse --abbrev-ref HEAD
-  master-branch = !sh -c 'echo ${GIT_MASTER_BRANCH:-master}' -
+
+  # get name of the main branch of a project
+  # (usually master, use GIT_MASTER_BRANCH environment variable to change)
+  # ex: git master-branch-name
+  # > master
+  master-branch-name = !sh -c 'echo ${GIT_MASTER_BRANCH:-master}' -
+
+  # get current commit hash (full sha1)
+  # ex: git current-commit-hash
+  # > c9f997a66e6748f34e3311bff5af8795e43c0d2a
   current-commit-hash = rev-parse HEAD
+
+  # get current commit hash (short)
+  # ex: git current-commit-hash-short
+  # > c9f997a
   current-commit-hash-short = rev-parse --short HEAD
 
   # execute a git command with current changes being auto-stashed and restored (if command is successful)
+  # ex: git stashed checkout master
   stashed = !sh -c \"LC_ALL=C git stash save | grep 'No local changes to save' && git $* || (git $* && git stash pop)\" -
 
+  # get commit hash of the fork point between two branches (default master branch and HEAD)
+  # ex: git fork-commit
+  # > ce79421a281912534bba53191a0bbd223a4e9c21
+  # ex: git fork-commit master my-feature
+  # > c9f997a66e6748f34e3311bff5af8795e43c0d2a
   fork-commit = !sh -c 'git merge-base --fork-point "${1:-$(git master-branch)}" "${2:-HEAD}"' -
-  initial-commit-hash = rev-list --max-parents=0 HEAD
+
+
+  # get hash of the project's initial commit
+  # ex: git initial-commit-hash
+  # > d496667a42425c45d31f81a41a4e24afc8e28e49
+  initial-commit-hash = !sh -c 'rev-list --max-parents=0 $(git master-branch-name)' -
+
+  # get commit hash of the oldest commit with a commit messages starting with "fixup!" or "squash!"
+  # ex: git oldest-autosquash-commit
+  # > ce79421a281912534bba53191a0bbd223a4e9c21
   oldest-autosquash-commit = !sh -c \"git log --pretty=%H --grep='^fixup!' --grep '^squash!' | tail -1\" -
 
+  # get name of the tracking branch associated with the current branch
+  # ex: git tracking-branch-name
+  # > origin/master
+  # ex: git tracking-branch-name my-feature
+  # > origin/features/my-feature
   tracking-branch-name = !sh -c 'git rev-parse --abbrev-ref --symbolic-full-name {1:-$(git current-branch-name)}@{upstream}' -

@@ -1,3 +1,4 @@
 .gitattributes  export-ignore
+docs  export-ignore
 bootstrap.sh  export-ignore
 README.md  export-ignore

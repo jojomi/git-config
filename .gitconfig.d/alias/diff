@@ -1,10 +1,18 @@
 [alias]
-  # short alias
+  # diff
+  # ex: git d
   d = diff
 
-  # create word diff which can keep small changes oneline
-  wdiff = diff --word-diff=color
+  # word diff (can keep small changes oneline)
+  # ex: git word-diff
+  word-diff = diff --word-diff=color
+
+  # alias: word-diff
   wd = !git wdiff
 
-  # show staged changes
-  staged = diff --cached
+  # show diff for staged changes (vs. HEAD)
+  # ex: git diff-staged
+  diff-staged = diff --cached
+
+  # alias: staged
+  ds = !git staged

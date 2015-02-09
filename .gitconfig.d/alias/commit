@@ -1,7 +1,34 @@
 [alias]
+  # commit
+  # ex: git c
   c = commit --verbose
+
+  # commit with message
+  # ex: git cm 'my commit message'
   cm = commit --verbose --message
+
+  # commit after adding all pending changes
+  # ex: git ca
   ca = commit --verbose --all
+
+  # commit after with message adding all pending changes
+  # ex: git cam 'my commit message'
   cam = commit --verbose --all --message
 
+  # commit patch-based
+  # ex: git cp
+  # > diff --git a/.gitconfig.d/alias/add b/.gitconfig.d/alias/add
+  # > index dc45b66..6425264 100644
+  # > --- a/.gitconfig.d/alias/add
+  # > +++ b/.gitconfig.d/alias/add
+  # > @@ -15,7 +15,7 @@
+  # >    content
+  # >    content
+  # >
+  # > -  remove content
+  # > +  add content
+  # >    content
+  # >    content
+  # >    content
+  # > Stage this hunk [y,n,q,a,d,/,e,?]? 
   cp = commit --patch

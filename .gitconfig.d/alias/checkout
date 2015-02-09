@@ -1,2 +1,25 @@
 [alias]
-  cp = checkout --patch
+  # checkout patch-based
+  # ex: git cop
+  # > diff --git a/.gitconfig.d/alias/add b/.gitconfig.d/alias/add
+  # > index dc45b66..6425264 100644
+  # > --- a/.gitconfig.d/alias/add
+  # > +++ b/.gitconfig.d/alias/add
+  # > @@ -15,7 +15,7 @@
+  # >    random
+  # >    existing lines
+  # >
+  # > -  old line
+  # > +  new line
+  # >    unchanged content
+  # >
+  # > Stage this hunk [y,n,q,a,d,/,e,?]?
+  cop = checkout --patch
+
+  # checkout a file by using our state
+  # ex: git ours index.html
+  ours = !sh -c 'git checkout --ours $@ && git add "$@"' -
+
+  # checkout a file by using their state
+  # ex: git theirs index.html
+  theirs = !sh -c 'git checkout --theirs $@ && git add "$@"' -

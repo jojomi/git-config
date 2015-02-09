@@ -1,10 +1,42 @@
 [alias]
-  # short aliases
+  # add
+  # ex: git a image.png
+  # ex: git a .
   a = add
+
+  # add files interactively (file-based)
+  # ex: git ai
+  # >            staged     unstaged path
+  # > 1:    unchanged        +7/-1 .gitconfig.d/alias/add
+  # >
+  # > *** Commands ***
+  # > 1: status	  2: update	  3: revert	  4: add untracked
+  # > 5: patch	  6: diff	  7: quit	  8: help
+  # > What now>
   ai = add --interactive
+
+  # add files patch-based
+  # ex: git ap
+  # > diff --git a/.gitconfig.d/alias/add b/.gitconfig.d/alias/add
+  # > index 39b0929..b2c86c7 100644
+  # > --- a/.gitconfig.d/alias/add
+  # > +++ b/.gitconfig.d/alias/add
+  # > @@ -1,7 +1,22 @@
+  # >  [alias]
+  # > -  # removed line
+  # > +  # added line
+  # > Stage this hunk [y,n,q,a,d,/,s,e,?]?
   ap = add --patch
 
-  # include status after add operation
+
+  # include status after adding
+  # see: a
   as = !git a "$@" && git s
+
+  # include status after adding interactively
+  # see: ai
   ais = !git ai "$@" && git s
+
+  # include status after adding patch-based
+  # see: ap
   aps = !git ap "$@" && git s

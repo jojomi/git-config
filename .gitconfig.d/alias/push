@@ -1,5 +1,12 @@
 [alias]
-  # short aliases
+  # push
+  # ex: git ps
   ps = push
+
+  # push
+  # ex: git pus
   pus = push
+
+  # force push (attention: may create huge chaos)
+  # ex: git pf
   pf = push --force

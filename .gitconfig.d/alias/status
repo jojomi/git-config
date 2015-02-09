@@ -2,13 +2,17 @@
 
 [alias]
   # short status
+  # ex: git s
   s = status --short --branch
 
   # more verbose status
+  # ex: git st
   st = status --branch
 
   # overview, parameter: number of log entries [default 3]
+  # ex: git o
   o = !sh -c '(git describe 2>/dev/null || echo "no tag") && git s && echo "" && (git lb | head -n ${1:-3} && echo "")' -
 
   # overview including working dir diff, parameter: number of log entries [default 3]
+  # ex: git od
   od = !sh -c 'git o "$@" && echo "" && git diff HEAD^..' -
