@@ -10,9 +10,15 @@
   st = status --branch
 
   # overview, parameter: number of log entries [default 3]
-  # ex: git o
-  o = !sh -c '(git describe 2>/dev/null || echo "no tag") && git s && echo "" && (git lb | head -n ${1:-3} && echo "")' -
+  # ex: git overview
+  overview = !sh -c '(git describe 2>/dev/null || echo "no tag") && git s && echo "" && (git lb | head -n ${1:-3} && echo "")' -
+
+  # alias: overview
+  o = !git overview
 
   # overview including working dir diff, parameter: number of log entries [default 3]
-  # ex: git od
-  od = !sh -c 'git o "$@" && echo "" && git diff HEAD^..' -
+  # ex: git overview-diff
+  overview-diff = !sh -c 'git o "$@" && echo "" && git diff HEAD^..' -
+
+  # alias: overview-diff
+  od = !git overview-diff

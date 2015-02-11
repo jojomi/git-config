@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+echo "Recreating docs..."
+./gen-docs.py
+git add docs/**

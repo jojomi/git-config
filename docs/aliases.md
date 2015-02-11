@@ -1595,32 +1595,54 @@ more verbose status
     st = status --branch
 
 
-<a name="o"></a>
-## git o<a name="o"></a>
+<a name="overview"></a>
+## git overview<a name="overview"></a>
 
 overview, parameter: number of log entries [default 3]
 
 **Example:**
 
-    >>> git o
+    >>> git overview
 
 **Implementation:**
 
-    o = !sh -c '(git describe 2>/dev/null || echo "no tag") && git s && echo "" && (git lb | head -n ${1:-3} && echo "")' -
+    overview = !sh -c '(git describe 2>/dev/null || echo "no tag") && git s && echo "" && (git lb | head -n ${1:-3} && echo "")' -
 
 
-<a name="od"></a>
-## git od<a name="od"></a>
+<a name="o"></a>
+## git o<a name="o"></a>
+
+
+= [git overview](#overview)
+
+**Implementation:**
+
+    o = !git overview
+
+
+<a name="overview-diff"></a>
+## git overview-diff<a name="overview-diff"></a>
 
 overview including working dir diff, parameter: number of log entries [default 3]
 
 **Example:**
 
-    >>> git od
+    >>> git overview-diff
 
 **Implementation:**
 
-    od = !sh -c 'git o "$@" && echo "" && git diff HEAD^..' -
+    overview-diff = !sh -c 'git o "$@" && echo "" && git diff HEAD^..' -
+
+
+<a name="od"></a>
+## git od<a name="od"></a>
+
+
+= [git overview-diff](#overview-diff)
+
+**Implementation:**
+
+    od = !git overview-diff
 
 
 # tracking
