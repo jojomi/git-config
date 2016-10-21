@@ -2,17 +2,17 @@
   # show diff since fork
   # ex: git diff-since-fork
   # ex: git diff-since-fork master my-feature
-  diff-since-fork = !sh -c 'git diff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+  diff-since-fork = !sh -c 'git diff $(git fork-commit "${1:-$(git master-branch-name)}" "${2:-HEAD}").."${2:-HEAD}"' -
 
   # show word-based diff since fork
   # ex: git word-diff-since-fork
   # ex: git word-diff-since-fork master my-feature
-  word-diff-since-fork = !sh -c 'git wdiff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+  word-diff-since-fork = !sh -c 'git wdiff $(git fork-commit "${1:-$(git master-branch-name)}" "${2:-HEAD}").."${2:-HEAD}"' -
 
   # show files changed since fork
   # ex: files-changed-since-fork
   # ex: files-changed-since-fork master my-feature
-  files-changed-since-fork = !sh -c 'git diff --name-only $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+  files-changed-since-fork = !sh -c 'git diff --name-only $(git fork-commit "${1:-$(git master-branch-name)}" "${2:-HEAD}").."${2:-HEAD}"' -
 
 
   # remove branch

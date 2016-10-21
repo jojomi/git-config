@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-SOURCE_BRANCH=${2:-$(git master-branch)}
+SOURCE_BRANCH=${2:-$(git master-branch-name)}
 CURRENT_BRANCH=$(git current-branch-name)
 case "$CURRENT_BRANCH" in
   $SOURCE_BRANCH) git ll ${1:-} ;;

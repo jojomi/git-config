@@ -29,7 +29,7 @@
   # > ce79421a281912534bba53191a0bbd223a4e9c21
   # ex: git fork-commit master my-feature
   # > c9f997a66e6748f34e3311bff5af8795e43c0d2a
-  fork-commit = !sh -c 'git merge-base --fork-point "${1:-$(git master-branch)}" "${2:-HEAD}"' -
+  fork-commit = !sh -c 'git merge-base --fork-point "${1:-$(git master-branch-name)}" "${2:-HEAD}"' -
 
 
   # get hash of the project's initial commit

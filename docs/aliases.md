@@ -435,7 +435,7 @@ get commit hash of the fork point between two branches (default master branch an
 
 **Implementation:**
 
-    fork-commit = !sh -c 'git merge-base --fork-point "${1:-$(git master-branch)}" "${2:-HEAD}"' -
+    fork-commit = !sh -c 'git merge-base --fork-point "${1:-$(git master-branch-name)}" "${2:-HEAD}"' -
 
 
 <a name="initial-commit-hash"></a>
@@ -682,7 +682,7 @@ inverted merging (being on target branch) without specifying fast-forward style
 
 **Implementation:**
 
-    mergeto = !sh -c 'SOURCE=$(git current-branch-name) && DEST=${1:-$(git master-branch)} && git checkout $DEST && git upd && git merge $MERGE_PARAMS $SOURCE && git ll $(git fork-commit $DEST $SOURCE)~2.. && echo -e "Merged `tput bold`$SOURCE `tput sgr0`to `tput bold`$DEST`tput sgr0`. Use `tput bold`git kill-branch $SOURCE `tput sgr0`to remove source branch if merge succeeded."' -
+    mergeto = !sh -c 'SOURCE=$(git current-branch-name) && DEST=${1:-$(git master-branch-name)} && git checkout $DEST && git upd && git merge $MERGE_PARAMS $SOURCE && git ll $(git fork-commit $DEST $SOURCE)~2.. && echo -e "Merged `tput bold`$SOURCE `tput sgr0`to `tput bold`$DEST`tput sgr0`. Use `tput bold`git kill-branch $SOURCE `tput sgr0`to remove source branch if merge succeeded."' -
 
 
 <a name="mergetonf"></a>
@@ -1098,7 +1098,7 @@ show diff since fork
 
 **Implementation:**
 
-    diff-since-fork = !sh -c 'git diff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+    diff-since-fork = !sh -c 'git diff $(git fork-commit "${1:-$(git master-branch-name)}" "${2:-HEAD}").."${2:-HEAD}"' -
 
 
 <a name="word-diff-since-fork"></a>
@@ -1116,7 +1116,7 @@ show word-based diff since fork
 
 **Implementation:**
 
-    word-diff-since-fork = !sh -c 'git wdiff $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+    word-diff-since-fork = !sh -c 'git wdiff $(git fork-commit "${1:-$(git master-branch-name)}" "${2:-HEAD}").."${2:-HEAD}"' -
 
 
 <a name="files-changed-since-fork"></a>
@@ -1134,7 +1134,7 @@ show files changed since fork
 
 **Implementation:**
 
-    files-changed-since-fork = !sh -c 'git diff --name-only $(git fork-commit "${1:-$(git master-branch)}" "${2:-HEAD}").."${2:-HEAD}"' -
+    files-changed-since-fork = !sh -c 'git diff --name-only $(git fork-commit "${1:-$(git master-branch-name)}" "${2:-HEAD}").."${2:-HEAD}"' -
 
 
 <a name="remove-branch"></a>

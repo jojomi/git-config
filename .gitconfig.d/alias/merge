@@ -14,7 +14,7 @@
 
   # inverted merging (being on target branch) without specifying fast-forward style
   # ex: git mergeto master
-  mergeto = !sh -c 'SOURCE=$(git current-branch-name) && DEST=${1:-$(git master-branch)} && git checkout $DEST && git upd && git merge $MERGE_PARAMS $SOURCE && git ll $(git fork-commit $DEST $SOURCE)~2.. && echo -e "Merged `tput bold`$SOURCE `tput sgr0`to `tput bold`$DEST`tput sgr0`. Use `tput bold`git kill-branch $SOURCE `tput sgr0`to remove source branch if merge succeeded."' -
+  mergeto = !sh -c 'SOURCE=$(git current-branch-name) && DEST=${1:-$(git master-branch-name)} && git checkout $DEST && git upd && git merge $MERGE_PARAMS $SOURCE && git ll $(git fork-commit $DEST $SOURCE)~2.. && echo -e "Merged `tput bold`$SOURCE `tput sgr0`to `tput bold`$DEST`tput sgr0`. Use `tput bold`git kill-branch $SOURCE `tput sgr0`to remove source branch if merge succeeded."' -
 
   # inverted merging (being on target branch) without fast-forwarding
   # ex: git mergetonf master
