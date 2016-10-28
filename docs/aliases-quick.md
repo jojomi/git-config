@@ -175,6 +175,8 @@
 <tr><td><strong>git o</strong></td><td>↪ overview</td></tr>
 <tr><td><strong>git overview-diff</strong></td><td>overview including working dir diff, parameter: number of log entries [default 3]</td></tr>
 <tr><td><strong>git od</strong></td><td>↪ overview-diff</td></tr>
+<tr><td><strong>git where</strong></td><td>show current branch and HEAD commit including commit message ("where am I?")</td></tr>
+<tr><td><strong>git w</strong></td><td>↪ where</td></tr>
 </table>
 
 # tracking

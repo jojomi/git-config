@@ -1,4 +1,4 @@
-# dependency: log aliases (git lb)
+# dependency: log aliases (git lb, git l)
 
 [alias]
   # short status
@@ -22,3 +22,10 @@
 
   # alias: overview-diff
   od = !git overview-diff
+
+  # show current branch and HEAD commit including commit message ("where am I?")
+  # ex: git where
+  where = !sh -c 'echo "Branch:" && git current-branch-name && echo "HEAD commit:" && git l 1' -
+
+  # alias: where
+  w = !git where

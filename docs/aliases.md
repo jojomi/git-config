@@ -1645,6 +1645,31 @@ overview including working dir diff, parameter: number of log entries [default 3
     od = !git overview-diff
 
 
+<a name="where"></a>
+## git where<a name="where"></a>
+
+show current branch and HEAD commit including commit message ("where am I?")
+
+**Example:**
+
+    >>> git overview-diff
+
+**Implementation:**
+
+    where = !sh -c 'printf "%-14s" "Branch:" && git current-branch-name && printf "%-14s" "HEAD commit:" && git l 1' -
+
+
+<a name="w"></a>
+## git w<a name="w"></a>
+
+
+= [git where](#where)
+
+**Implementation:**
+
+    w = !git where
+
+
 # tracking
 
 
